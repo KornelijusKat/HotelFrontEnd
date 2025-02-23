@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import apiService from '../src/services/apiService';
-
+import { useLocation } from 'react-router-dom';
 const ReservationList = () => {
     const [reservations, setReservations] = useState([]);
+    const location = useLocation();
+
     const [search, setSearch] = useState({ name: '', code: '' });
     const [error, setError] = useState('');
-
+    useEffect(() => {
+        if (location.state?.newReservation) {
+            setReservations(prev => {
+                const isDuplicate = prev.some(res => res.code === location.state.newReservation.code);
+                return isDuplicate ? prev : [...prev, location.state.newReservation];
+            });
+        }
+    }, [location.state]);
     const handleSearchChange = (e) => {
         setSearch({ ...search, [e.target.name]: e.target.value });
     };

@@ -10,6 +10,7 @@ const ReservationForm = () => {
   const [formData, setFormData] = useState({ name: '', address: '', city: '', zip: '', country: '', checkin: '', checkout: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+ 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -20,7 +21,7 @@ const ReservationForm = () => {
     try {
       const response = await apiService.reserveRoom(id, formData);
       if (response && response.reservations) {
-        navigate("/reservations");
+        navigate("/reservations",{ state: { newReservation: response.reservations } });
       } else {
         setError("Reservation failed. Room already taken.");
       }

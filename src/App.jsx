@@ -4,7 +4,6 @@ import LandingPage from '../components/LandingPage';
 import ReservationPage from '../components/ReservationForm';
 import ReservationList from '../components/ReservationList';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import RoomDetailsPage from '../components/roomDetails';
 
 
@@ -20,7 +19,6 @@ const App = () => {
         <Route path='/room/:id' element={<RoomDetailsPage/>}/>
       </Routes>
     </div>
-    <Footer />
   </div>
   );
 };
